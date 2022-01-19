@@ -31,8 +31,8 @@ class ThirdScreen extends StatelessWidget {
       body: SmartRefresher(
         controller: _refreshController,
         header: const ClassicHeader(),
-        enablePullUp: true,
-        enablePullDown: false,
+        enablePullUp: false,
+        enablePullDown: true,
         onLoading: () {
           thirdC.nextPage();
           _refreshController.loadComplete();
@@ -61,6 +61,7 @@ class ThirdScreen extends StatelessWidget {
                         color: Colors.black26,
                       ),
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         String selected =

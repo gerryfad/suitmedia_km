@@ -22,8 +22,7 @@ class ThirdScreenController extends GetxController {
 
   Future<List<dynamic>> fetchAllUsers() async {
     var page = 2;
-    Uri url =
-        Uri.parse("https://reqres.in/api/users?page='${page}&per_page=10'");
+    Uri url = Uri.parse("https://reqres.in/api/users?page=$page&per_page=10");
     final response = await http.get(url);
     var data = (json.decode(response.body)['data']);
     return data;
