@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 
 class ThirdScreenController extends GetxController {
-  var page = 2;
+  var page = 1;
 
   Future<List> fetchUser() async {
     Uri url = Uri.parse("https://reqres.in/api/users?page=1&per_page=10");
@@ -21,9 +21,7 @@ class ThirdScreenController extends GetxController {
   }
 
   Future<List<dynamic>> fetchAllUsers() async {
-    var page = 2;
-    Uri url =
-        Uri.parse("https://reqres.in/api/users?page='${page}&per_page=10'");
+    Uri url = Uri.parse("https://reqres.in/api/users?page=$page&per_page=10");
     final response = await http.get(url);
     var data = (json.decode(response.body)['data']);
     return data;
@@ -31,5 +29,7 @@ class ThirdScreenController extends GetxController {
 
   void nextPage() {
     page++;
+    update();
+    print(page);
   }
 }
