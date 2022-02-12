@@ -1,35 +1,25 @@
-import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:suitmedia_km/services/api.dart';
 import '../models/user.dart';
 
 class ThirdScreenController extends GetxController {
-  var page = 1;
+  int page = 1;
+  final Api api = Api();
 
-  Future<List> fetchUser() async {
-    Uri url = Uri.parse("https://reqres.in/api/users?page=1&per_page=10");
-
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body)['data'];
-      List Users = data.map((i) => Result.fromJson(i)).toList();
-      return Users;
-    } else {
-      throw Exception(response.statusCode);
-    }
+  Future<List<User>> getAllUser() async {
+    return api.getAllUser(page);
   }
 
-  Future<List<dynamic>> fetchAllUsers() async {
-    Uri url = Uri.parse("https://reqres.in/api/users?page=$page&per_page=10");
-    final response = await http.get(url);
-    var data = (json.decode(response.body)['data']);
-    return data;
+  Future<List<User>> getAllUserDio() async {
+    return api.getAllUserDio(page);
+  }
+
+  Future<User> getUser() {
+    return api.getUser();
   }
 
   void nextPage() {
     page++;
     update();
-    print(page);
   }
 }
